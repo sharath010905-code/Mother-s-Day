@@ -280,6 +280,8 @@ p {
     box-shadow: 0 25px 60px rgba(0,0,0,0.15);
     background: #ffffff;
     border-radius: 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .envelope-wrapper.open.fullscreen-letter .text {
@@ -302,17 +304,33 @@ canvas {
     z-index: 1000;
 }
 
-@media (max-height: 700px) {
+@media (max-width: 600px), (max-height: 700px) {
+    .envelope-wrapper {
+        transform: translateY(-80px) scale(0.85);
+    }
     .envelope-wrapper.open.fullscreen-letter .letter {
-        padding: 20px;
+        padding: 25px 15px;
+        width: 92vw;
+        height: 85vh;
+        max-height: none;
+    }
+    .envelope-wrapper.open.fullscreen-letter .text {
+        justify-content: flex-start;
     }
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
         margin-bottom: 10px;
+        margin-top: 10px;
     }
     p {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+    .ps {
+        font-size: 0.85rem;
+        padding: 10px;
+        margin-top: 15px;
     }
 }
 
