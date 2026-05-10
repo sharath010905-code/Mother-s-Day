@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For You, Putta ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap"
-        rel="stylesheet">
 </head>
-
 <body>
+
+    <!-- Firefly particles background -->
     <canvas id="fireflies"></canvas>
-    <div class="container">
-        <div class="envelope-wrapper" id="envelope">
-            <div class="envelope">
-                <div class="flap"></div>
-                <div class="pocket-left"></div>
-                <div class="pocket-right"></div>
-                <div class="pocket-bottom"></div>
-                <div class="letter">
-                    <div class="text">
-                        <h1>Happy Mother's Day,<br>Putta ❤️</h1>
-                        <p>You might not be my actual mom, but you sure act like one! 🙄</p>
-                        <p>From scolding me for no reason, to taking care of my health (while still scolding me for not
-                            listening), to stubbornly never listening to anything I say...</p>
-                        <p>You really have the "Mom" role down perfectly.</p>
-                        <div class="divider"></div>
-                        <p>Jokes aside, thank you for always looking out for me and caring so much. I appreciate you,
-                            Putta. ❤️</p>
-                        <p class="ps">P.S. There's a little surprise coming your way soon! ❤️</p>
-                    </div>
-                </div>
-                <div class="heart" id="heart">
-                    <svg viewBox="0 0 24 24" fill="white">
-                        <path
-                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+
+    <!-- Confetti/petal canvas (on top) -->
+    <canvas id="confetti"></canvas>
+
+    <!-- ===== STEP 1: Envelope Landing ===== -->
+    <div id="landing" class="landing">
+        <div class="envelope-box" id="envelopeBox">
+            <!-- envelope back -->
+            <div class="env-body">
+                <div class="env-left"></div>
+                <div class="env-right"></div>
+                <div class="env-bottom"></div>
+                <!-- The flap -->
+                <div class="env-flap" id="envFlap"></div>
+                <!-- Letter peeking inside -->
+                <div class="env-letter-peek" id="letterPeek"></div>
+                <!-- Wax seal / heart button -->
+                <div class="seal" id="seal">
+                    <svg viewBox="0 0 24 24" fill="white" width="22" height="22">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
                 </div>
             </div>
         </div>
-        <p class="instruction">Tap the heart to see your surprise! ✨</p>
+        <p class="hint" id="hint">Tap the heart to see your surprise ✨</p>
     </div>
 
-    <canvas id="confetti"></canvas>
+    <!-- ===== STEP 2: Full-page Letter ===== -->
+    <div id="letterPage" class="letter-page hidden">
+        <div class="letter-card" id="letterCard">
+            <h1 class="letter-title anim" data-delay="0">Happy Mother's Day,<br>Putta ❤️</h1>
+            <p class="anim" data-delay="1">You might not be my actual mom, but you sure act like one! 🙄</p>
+            <p class="anim" data-delay="2">From scolding me for no reason, to taking care of my health (while still scolding me for not listening), to stubbornly never listening to anything I say…</p>
+            <p class="anim" data-delay="3">You really have the "Mom" role down perfectly.</p>
+            <div class="divider anim" data-delay="4"></div>
+            <p class="anim" data-delay="5">Jokes aside, thank you for always looking out for me and caring so much. I appreciate you, Putta. ❤️</p>
+            <p class="ps anim" data-delay="6">P.S. There's a little surprise coming your way soon! ❤️</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
