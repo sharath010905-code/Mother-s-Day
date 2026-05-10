@@ -51,7 +51,7 @@ class Particle {
         ctx.rotate(this.rotation * Math.PI / 180);
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = this.color;
-        
+
         if (this.type === 'heart') {
             ctx.beginPath();
             let topCurveHeight = this.size * 0.3;
@@ -77,17 +77,17 @@ class Particle {
 
 function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
-        
+
         if (particles[i].opacity <= 0 || particles[i].y > canvas.height) {
             particles.splice(i, 1);
             i--;
         }
     }
-    
+
     if (particles.length > 0) {
         requestAnimationFrame(animateParticles);
     } else {
@@ -108,12 +108,12 @@ function explodeHearts() {
 envelope.addEventListener('click', () => {
     if (!envelope.classList.contains('open')) {
         envelope.classList.add('open');
-        
+
         // Explode hearts slightly after flap opens
         setTimeout(() => {
             explodeHearts();
         }, 300);
-        
+
         // After letter pulls out, expand it
         setTimeout(() => {
             envelope.classList.add('fullscreen-letter');
@@ -124,9 +124,9 @@ envelope.addEventListener('click', () => {
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const firefliesCanvas = document.getElementById('fireflies');
-    if(firefliesCanvas) {
+    if (firefliesCanvas) {
         firefliesCanvas.width = window.innerWidth;
         firefliesCanvas.height = window.innerHeight;
     }
@@ -140,7 +140,7 @@ if (firefliesCanvas) {
     firefliesCanvas.height = window.innerHeight;
 
     let fireflies = [];
-    for(let i=0; i<60; i++) {
+    for (let i = 0; i < 60; i++) {
         fireflies.push({
             x: Math.random() * firefliesCanvas.width,
             y: Math.random() * firefliesCanvas.height,
@@ -150,17 +150,17 @@ if (firefliesCanvas) {
             alpha: Math.random() * 0.5 + 0.3
         });
     }
-    
+
     function animateFireflies() {
         fctx.clearRect(0, 0, firefliesCanvas.width, firefliesCanvas.height);
-        for(let f of fireflies) {
+        for (let f of fireflies) {
             f.x += f.vx;
             f.y += f.vy;
-            if(f.x < 0 || f.x > firefliesCanvas.width) f.vx *= -1;
-            if(f.y < 0 || f.y > firefliesCanvas.height) f.vy *= -1;
-            
+            if (f.x < 0 || f.x > firefliesCanvas.width) f.vx *= -1;
+            if (f.y < 0 || f.y > firefliesCanvas.height) f.vy *= -1;
+
             fctx.beginPath();
-            fctx.arc(f.x, f.y, f.size, 0, Math.PI*2);
+            fctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
             fctx.fillStyle = `rgba(255, 230, 150, ${f.alpha + Math.sin(Date.now() * 0.003 + f.x) * 0.2})`;
             fctx.shadowBlur = 8;
             fctx.shadowColor = '#fff5cc';
@@ -173,19 +173,19 @@ if (firefliesCanvas) {
 
 // 3D Tilt effect
 envelope.addEventListener('mousemove', (e) => {
-    if(envelope.classList.contains('open')) return;
+    if (envelope.classList.contains('open')) return;
     const rect = envelope.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const xPct = x / rect.width - 0.5;
     const yPct = y / rect.height - 0.5;
-    
+
     envelope.style.transform = `perspective(1000px) rotateY(${xPct * 8}deg) rotateX(${-yPct * 8}deg) translateY(-2px)`;
 });
 
 envelope.addEventListener('mouseleave', () => {
-    if(!envelope.classList.contains('open')) {
+    if (!envelope.classList.contains('open')) {
         envelope.style.transform = '';
     }
 });
