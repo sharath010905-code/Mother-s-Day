@@ -1,16 +1,18 @@
 /* ============================================
    RESET & BASE
    ============================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
 }
 
 body {
@@ -22,15 +24,22 @@ body {
 /* ============================================
    CANVAS LAYERS (fireflies & confetti)
    ============================================ */
-#fireflies, #confetti {
+#fireflies,
+#confetti {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
 }
-#fireflies { z-index: 1; }
-#confetti  { z-index: 200; }
+
+#fireflies {
+    z-index: 1;
+}
+
+#confetti {
+    z-index: 200;
+}
 
 /* ============================================
    LANDING PAGE
@@ -44,6 +53,9 @@ body {
     align-items: center;
     justify-content: center;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+    /* Ensure it always fills the full viewport */
+    width: 100vw;
+    height: 100vh;
 }
 
 .landing.fade-out {
@@ -65,18 +77,26 @@ body {
 }
 
 @keyframes dropIn {
-    from { opacity: 0; transform: translateY(-60px) scale(0.88); }
-    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    from {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.88);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Envelope body */
 .env-body {
     position: relative;
     width: 100%;
-    padding-top: 68%; /* aspect ratio */
+    padding-top: 68%;
+    /* aspect ratio */
     border-radius: 8px;
     background: #e8d5cc;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     overflow: visible;
 }
 
@@ -106,12 +126,14 @@ body {
 
 .env-flap {
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 60%;
     clip-path: polygon(0 0, 50% 100%, 100% 0);
     background: #f2e2d9;
     transform-origin: top center;
-    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 3;
 }
 
@@ -122,14 +144,15 @@ body {
 
 .env-letter-peek {
     position: absolute;
-    bottom: 8%; left: 8%;
+    bottom: 8%;
+    left: 8%;
     width: 84%;
     height: 60%;
     background: white;
     border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     z-index: 2;
-    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1) 0.3s;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 }
 
 .env-letter-peek.lift {
@@ -139,14 +162,18 @@ body {
 /* Wax seal */
 .seal {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
-    width: 48px; height: 48px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: linear-gradient(135deg, #eacda3 0%, #d6ae7b 100%);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 14px rgba(214,174,123,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(214, 174, 123, 0.5);
     animation: sealPulse 2s ease-in-out infinite;
     transition: transform 0.3s ease, opacity 0.4s ease;
 }
@@ -158,8 +185,15 @@ body {
 }
 
 @keyframes sealPulse {
-    0%, 100% { box-shadow: 0 4px 14px rgba(214,174,123,0.4); }
-    50%       { box-shadow: 0 4px 24px rgba(214,174,123,0.7); }
+
+    0%,
+    100% {
+        box-shadow: 0 4px 14px rgba(214, 174, 123, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 4px 24px rgba(214, 174, 123, 0.7);
+    }
 }
 
 /* Hint text */
@@ -172,23 +206,22 @@ body {
     transition: opacity 0.4s ease;
 }
 
-.hint.hide { opacity: 0; }
+.hint.hide {
+    opacity: 0;
+}
 
 /* ============================================
    LETTER PAGE
    ============================================ */
 .letter-page {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    padding: 24px 16px;
+    /* Normal document flow — no fixed, no flex centering */
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 16px 40px;
     background: linear-gradient(135deg, #fdfbfb 0%, #f6ebe6 100%);
+    position: relative;
+    z-index: 100;
 }
 
 .letter-page.hidden {
@@ -200,9 +233,9 @@ body {
     max-width: 480px;
     background: #ffffff;
     border-radius: 16px;
-    padding: 36px 28px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    /* Let it be as tall as it needs */
+    padding: 36px 28px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    margin: 0 auto;
 }
 
 /* ============================================
